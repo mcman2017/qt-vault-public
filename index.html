@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Qt-Vault Helm Repository</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+        h1 { color: #333; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .badge { display: inline-block; padding: 5px 10px; background: #0366d6; color: white; border-radius: 3px; text-decoration: none; margin: 5px 5px 5px 0; }
+        .badge:hover { background: #0256b9; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Qt-Vault Helm Repository</h1>
+    <p>Quantum-safe Kubernetes operator for managing encrypted secrets using post-quantum cryptography.</p>
+
+    <a class="badge" href="https://github.com/mcman2017/qt-vault-public">GitHub</a>
+
+    <h2>Installation</h2>
+    <pre><code>helm repo add qt-vault https://mcman2017.github.io/qt-vault-public
+helm repo update
+helm install qt-vault qt-vault/qt-vault -n qt-vault --create-namespace</code></pre>
+
+    <h2>Available Charts</h2>
+    <table>
+        <tr><th>Chart</th><th>Version</th><th>App Version</th></tr>
+        <tr><td>qt-vault</td><td>0.1.0</td><td>0.1.0</td></tr>
+    </table>
+
+    <h2>Cryptography</h2>
+    <p>This operator uses NIST-standardized post-quantum algorithms:</p>
+    <table>
+        <tr><th>Algorithm</th><th>Purpose</th><th>Standard</th></tr>
+        <tr><td>ML-KEM-768</td><td>Key Encapsulation</td><td>NIST FIPS 203</td></tr>
+        <tr><td>X25519</td><td>Classical Key Exchange</td><td>RFC 7748</td></tr>
+        <tr><td>ML-DSA-65</td><td>Digital Signatures</td><td>NIST FIPS 204</td></tr>
+        <tr><td>Ed25519</td><td>Classical Signatures</td><td>RFC 8032</td></tr>
+    </table>
+    <p>Hybrid mode combines classical and post-quantum algorithms for defense in depth.</p>
+
+    <h2>Container Images</h2>
+    <pre><code>ghcr.io/mcman2017/qt-vault:v0.1.0</code></pre>
+</body>
+</html>

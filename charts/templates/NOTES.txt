@@ -1,0 +1,90 @@
+
+===============================================================================
+   ___  _____      __     ___   _   _ _   _____
+  / _ \|_   _|    / /    / / | | | / \ | |_   _|
+ | | | | | |_____/ /    / /| | | |/ _ \| | | |
+ | |_| | | |_____\ \   / / | |_| / ___ \ |_| |
+  \__\_\ |_|      \_\ /_/   \___/_/   \_\___|_|
+
+        Quantum-Safe Secrets for Kubernetes
+===============================================================================
+
+Qt-Vault has been installed!
+
+Chart Version: {{ .Chart.Version }}
+App Version:   {{ .Chart.AppVersion }}
+Namespace:     {{ include "qt-vault.namespace" . }}
+
+===============================================================================
+GETTING STARTED
+===============================================================================
+
+1. Get the controller status:
+
+   kubectl get pods -n {{ include "qt-vault.namespace" . }} -l "app.kubernetes.io/name={{ include "qt-vault.name" . }}"
+
+2. Fetch the public key for sealing secrets:
+
+   kubectl get secret {{ .Values.secretName }} -n {{ include "qt-vault.namespace" . }} -o jsonpath='{.data.public-key}' | base64 -d > qt-vault.pub
+
+3. Install the qt-seal CLI tool:
+
+   # Download from releases page
+   curl -LO https://github.com/mcman2017/qt-vault/releases/download/v{{ .Chart.AppVersion }}/qt-seal-{{ .Chart.AppVersion }}-$(uname -s)-$(uname -m).tar.gz
+   tar xzf qt-seal-*.tar.gz
+   sudo mv qt-seal /usr/local/bin/
+
+4. Create a QuantumSecret:
+
+   # First, seal your secret
+   echo -n '{"apiVersion":"v1","kind":"Secret","metadata":{"name":"my-secret","namespace":"default"},"stringData":{"password":"supersecret"}}' | \
+     qt-seal seal --cert qt-vault.pub --format yaml > my-quantum-secret.yaml
+
+   # Apply it to the cluster
+   kubectl apply -f my-quantum-secret.yaml
+
+5. Verify the secret was created:
+
+   kubectl get secrets my-secret -o yaml
+   kubectl get quantumsecrets
+
+===============================================================================
+CRYPTOGRAPHY DETAILS
+===============================================================================
+
+This installation uses:
+- Key Encapsulation: ML-KEM-768 (NIST FIPS 203) + X25519 hybrid
+- Signatures:        ML-DSA-65 (NIST FIPS 204) + Ed25519 hybrid
+
+These are NIST-standardized post-quantum algorithms designed to be
+secure against both classical and quantum computer attacks.
+
+===============================================================================
+USEFUL COMMANDS
+===============================================================================
+
+# View controller logs
+kubectl logs -n {{ include "qt-vault.namespace" . }} -l "app.kubernetes.io/name={{ include "qt-vault.name" . }}" -f
+
+# List all QuantumSecrets
+kubectl get quantumsecrets --all-namespaces
+
+# Describe a QuantumSecret
+kubectl describe quantumsecret <name> -n <namespace>
+
+{{- if .Values.metrics.serviceMonitor.enabled }}
+
+# Prometheus metrics are available at:
+#   http://{{ include "qt-vault.fullname" . }}.{{ include "qt-vault.namespace" . }}:{{ .Values.service.metricsPort }}/metrics
+{{- end }}
+
+===============================================================================
+DOCUMENTATION
+===============================================================================
+
+For more information, visit:
+  https://github.com/mcman2017/qt-vault
+
+Report issues at:
+  https://github.com/mcman2017/qt-vault/issues
+

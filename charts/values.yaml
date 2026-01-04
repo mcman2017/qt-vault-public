@@ -1,0 +1,294 @@
+## @section Common parameters
+
+## @param kubeVersion Override Kubernetes version
+kubeVersion: ""
+
+## @param nameOverride String to partially override qt-vault.fullname
+nameOverride: ""
+
+## @param fullnameOverride String to fully override qt-vault.fullname
+fullnameOverride: ""
+
+## @param namespace Namespace where to deploy the Qt-Vault controller
+namespace: ""
+
+## @param commonAnnotations [object] Annotations to add to all deployed resources
+commonAnnotations: {}
+
+## @param commonLabels [object] Labels to add to all deployed resources
+commonLabels: {}
+
+## @section Qt-Vault Controller Parameters
+
+## Qt-Vault image configuration
+## @param image.registry Qt-Vault image registry
+## @param image.repository Qt-Vault image repository
+## @param image.tag Qt-Vault image tag (immutable tags are recommended)
+## @param image.pullPolicy Qt-Vault image pull policy
+## @param image.pullSecrets [array] Qt-Vault image pull secrets
+image:
+  registry: ghcr.io
+  repository: mcman2017/qt-vault
+  tag: "v0.1.0"
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+## @param replicaCount Number of Qt-Vault controller replicas
+replicaCount: 1
+
+## @param revisionHistoryLimit Number of old history to retain
+revisionHistoryLimit: ""
+
+## @param secretName The name of the TLS secret containing the quantum-safe keypair
+secretName: "qt-vault-keys"
+
+## @param keyrenewperiod Key renewal period (e.g., "720h" for 30 days)
+keyrenewperiod: ""
+
+## @param logLevel Log level (debug, info, warn, error)
+logLevel: "info"
+
+## @param logFormat Log format (text, json)
+logFormat: "json"
+
+## @param leaderElect Enable leader election for controller
+leaderElect: true
+
+## @param command Override default container command
+command: []
+
+## @param args Override default container args
+args: []
+
+## @section Probes configuration
+
+## @param livenessProbe.enabled Enable livenessProbe
+## @param livenessProbe.initialDelaySeconds Initial delay for livenessProbe
+## @param livenessProbe.periodSeconds Period for livenessProbe
+## @param livenessProbe.timeoutSeconds Timeout for livenessProbe
+## @param livenessProbe.failureThreshold Failure threshold for livenessProbe
+## @param livenessProbe.successThreshold Success threshold for livenessProbe
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 15
+  periodSeconds: 20
+  timeoutSeconds: 1
+  failureThreshold: 3
+  successThreshold: 1
+
+## @param readinessProbe.enabled Enable readinessProbe
+## @param readinessProbe.initialDelaySeconds Initial delay for readinessProbe
+## @param readinessProbe.periodSeconds Period for readinessProbe
+## @param readinessProbe.timeoutSeconds Timeout for readinessProbe
+## @param readinessProbe.failureThreshold Failure threshold for readinessProbe
+## @param readinessProbe.successThreshold Success threshold for readinessProbe
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 1
+  failureThreshold: 3
+  successThreshold: 1
+
+## @section Resources and Security
+
+## @param resources.limits [object] Resource limits for Qt-Vault containers
+## @param resources.requests [object] Resource requests for Qt-Vault containers
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi
+
+## @param podSecurityContext.enabled Enable pod security context
+## @param podSecurityContext.fsGroup Set pod fsGroup
+## @param podSecurityContext.runAsNonRoot Run as non-root user
+## @param podSecurityContext.runAsUser Run as user ID
+## @param podSecurityContext.runAsGroup Run as group ID
+## @param podSecurityContext.seccompProfile.type Seccomp profile type
+podSecurityContext:
+  enabled: true
+  fsGroup: 65532
+  runAsNonRoot: true
+  runAsUser: 65532
+  runAsGroup: 65532
+  seccompProfile:
+    type: RuntimeDefault
+
+## @param containerSecurityContext.enabled Enable container security context
+## @param containerSecurityContext.readOnlyRootFilesystem Read-only root filesystem
+## @param containerSecurityContext.allowPrivilegeEscalation Allow privilege escalation
+## @param containerSecurityContext.capabilities.drop [array] Capabilities to drop
+containerSecurityContext:
+  enabled: true
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+## @section Pod Scheduling
+
+## @param nodeSelector [object] Node labels for pod assignment
+nodeSelector: {}
+
+## @param tolerations [array] Tolerations for pod assignment
+tolerations: []
+
+## @param affinity [object] Affinity for pod assignment
+affinity: {}
+
+## @param podLabels [object] Extra labels for pods
+podLabels: {}
+
+## @param podAnnotations [object] Annotations for pods
+podAnnotations: {}
+
+## @param priorityClassName Priority class name for pods
+priorityClassName: ""
+
+## @section Container Ports
+
+## @param containerPorts.http HTTP port for the controller API
+## @param containerPorts.metrics Metrics port for Prometheus
+## @param containerPorts.health Health probe port
+containerPorts:
+  http: 8080
+  metrics: 8081
+  health: 8082
+
+## @section Service configuration
+
+service:
+  ## @param service.type Service type
+  type: ClusterIP
+
+  ## @param service.port HTTP service port
+  port: 8080
+
+  ## @param service.metricsPort Metrics service port
+  metricsPort: 8081
+
+  ## @param service.nodePort NodePort (if service type is NodePort)
+  nodePort: ""
+
+  ## @param service.annotations [object] Service annotations
+  annotations: {}
+
+## @section Ingress configuration
+
+ingress:
+  ## @param ingress.enabled Enable ingress
+  enabled: false
+
+  ## @param ingress.ingressClassName Ingress class name
+  ingressClassName: ""
+
+  ## @param ingress.hostname Default hostname
+  hostname: qt-vault.local
+
+  ## @param ingress.path Default path
+  path: /v1/cert.pem
+
+  ## @param ingress.pathType Ingress path type
+  pathType: ImplementationSpecific
+
+  ## @param ingress.annotations [object] Ingress annotations
+  annotations: {}
+
+  ## @param ingress.tls Enable TLS
+  tls: false
+
+  ## @param ingress.extraHosts [array] Additional hostnames
+  extraHosts: []
+
+  ## @param ingress.extraTls [array] Additional TLS configuration
+  extraTls: []
+
+## @section ServiceAccount configuration
+
+serviceAccount:
+  ## @param serviceAccount.create Create a service account
+  create: true
+
+  ## @param serviceAccount.name Service account name
+  name: ""
+
+  ## @param serviceAccount.annotations [object] Service account annotations
+  annotations: {}
+
+  ## @param serviceAccount.labels [object] Service account labels
+  labels: {}
+
+## @section RBAC configuration
+
+rbac:
+  ## @param rbac.create Create RBAC resources
+  create: true
+
+  ## @param rbac.clusterRole Create ClusterRole
+  clusterRole: true
+
+## @section Metrics configuration
+
+metrics:
+  ## Prometheus ServiceMonitor configuration
+  serviceMonitor:
+    ## @param metrics.serviceMonitor.enabled Enable ServiceMonitor
+    enabled: false
+
+    ## @param metrics.serviceMonitor.namespace ServiceMonitor namespace
+    namespace: ""
+
+    ## @param metrics.serviceMonitor.labels [object] Extra labels for ServiceMonitor
+    labels: {}
+
+    ## @param metrics.serviceMonitor.annotations [object] Annotations for ServiceMonitor
+    annotations: {}
+
+    ## @param metrics.serviceMonitor.interval Scrape interval
+    interval: ""
+
+    ## @param metrics.serviceMonitor.scrapeTimeout Scrape timeout
+    scrapeTimeout: ""
+
+## @section PodDisruptionBudget configuration
+
+pdb:
+  ## @param pdb.create Create PodDisruptionBudget
+  create: false
+
+  ## @param pdb.minAvailable Minimum available pods
+  minAvailable: 1
+
+  ## @param pdb.maxUnavailable Maximum unavailable pods
+  maxUnavailable: ""
+
+## @section Network Policy configuration
+
+networkPolicy:
+  ## @param networkPolicy.enabled Enable NetworkPolicy
+  enabled: false
+
+## @section CRD configuration
+
+crd:
+  ## @param crd.create Create the QuantumSecret CRD
+  create: true
+
+  ## @param crd.keep Keep CRD on helm uninstall
+  keep: true
+
+## @section Quantum Cryptography configuration
+
+quantum:
+  ## @param quantum.algorithm Key encapsulation algorithm (mlkem768, mlkem1024)
+  algorithm: "mlkem768"
+
+  ## @param quantum.hybridMode Enable hybrid mode (ML-KEM + X25519)
+  hybridMode: true
+
+  ## @param quantum.signatureAlgorithm Signature algorithm (mldsa65, mldsa87)
+  signatureAlgorithm: "mldsa65"

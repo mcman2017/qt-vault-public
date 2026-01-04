@@ -1,0 +1,18 @@
+{{- if and .Values.rbac.create .Values.rbac.clusterRole }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "qt-vault.fullname" . }}
+  labels: {{- include "qt-vault.labels" . | nindent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- toYaml .Values.commonAnnotations | nindent 4 }}
+  {{- end }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "qt-vault.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "qt-vault.serviceAccountName" . }}
+    namespace: {{ include "qt-vault.namespace" . }}
+{{- end }}

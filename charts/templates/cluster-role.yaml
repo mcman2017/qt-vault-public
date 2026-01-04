@@ -1,0 +1,36 @@
+{{- if and .Values.rbac.create .Values.rbac.clusterRole }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "qt-vault.fullname" . }}
+  labels: {{- include "qt-vault.labels" . | nindent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- toYaml .Values.commonAnnotations | nindent 4 }}
+  {{- end }}
+rules:
+  # QuantumSecrets management
+  - apiGroups: ["qtvault.io"]
+    resources: ["quantumsecrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["qtvault.io"]
+    resources: ["quantumsecrets/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: ["qtvault.io"]
+    resources: ["quantumsecrets/finalizers"]
+    verbs: ["update"]
+
+  # Secrets management
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+  # Events
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+
+  # Leader election
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+{{- end }}

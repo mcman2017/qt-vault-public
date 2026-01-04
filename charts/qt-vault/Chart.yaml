@@ -1,0 +1,33 @@
+apiVersion: v2
+name: qt-vault
+version: 0.1.0
+appVersion: "0.1.0"
+description: Quantum-safe Kubernetes operator for managing encrypted secrets using post-quantum cryptography (ML-KEM + X25519 hybrid encryption)
+type: application
+keywords:
+  - secrets
+  - quantum-safe
+  - post-quantum
+  - encryption
+  - ml-kem
+  - kubernetes-operator
+  - pqc
+home: https://github.com/mcman2017/qt-vault
+sources:
+  - https://github.com/mcman2017/qt-vault
+maintainers:
+  - name: mcman2017
+    url: https://github.com/mcman2017
+icon: https://raw.githubusercontent.com/mcman2017/qt-vault/main/docs/images/qt-vault-icon.png
+kubeVersion: ">=1.19.0-0"
+annotations:
+  category: Security
+  licenses: Apache-2.0
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/operator: "true"
+  artifacthub.io/operatorCapabilities: Seamless Upgrades
+  artifacthub.io/prerelease: "true"
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/changes: |
+    - kind: added
+      description: Initial release with quantum-safe encryption
