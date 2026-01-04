@@ -44,5 +44,16 @@ helm install qt-vault qt-vault/qt-vault -n qt-vault --create-namespace</code></p
 
     <h2>Container Images</h2>
     <pre><code>ghcr.io/mcman2017/qt-vault:v0.1.0</code></pre>
+
+    <h2>qt-seal CLI</h2>
+    <p>Download the <code>qt-seal</code> CLI to seal secrets client-side:</p>
+    <table>
+        <tr><th>Platform</th><th>Architecture</th><th>Download</th></tr>
+        <tr><td>macOS</td><td>ARM64 (Apple Silicon)</td><td><a href="https://github.com/mcman2017/qt-vault-public/releases/download/v0.1.0/qt-seal-darwin-arm64">qt-seal-darwin-arm64</a></td></tr>
+    </table>
+    <p>Installation:</p>
+    <pre><code>curl -LO https://github.com/mcman2017/qt-vault-public/releases/download/v0.1.0/qt-seal-darwin-arm64
+chmod +x qt-seal-darwin-arm64
+sudo mv qt-seal-darwin-arm64 /usr/local/bin/qt-seal</code></pre>
 </body>
 </html>

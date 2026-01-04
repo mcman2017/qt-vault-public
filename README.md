@@ -37,6 +37,37 @@ kubectl get pods -n qt-vault
 kubectl get crd quantumsecrets.qtvault.io
 ```
 
+### Install qt-seal CLI
+
+The `qt-seal` CLI is used to encrypt (seal) Kubernetes secrets client-side before committing them to Git.
+
+#### macOS (Apple Silicon)
+
+```bash
+# Download the binary
+curl -LO https://github.com/mcman2017/qt-vault-public/releases/download/v0.1.0/qt-seal-darwin-arm64
+
+# Make it executable
+chmod +x qt-seal-darwin-arm64
+
+# Move to PATH
+sudo mv qt-seal-darwin-arm64 /usr/local/bin/qt-seal
+
+# Verify installation
+qt-seal --version
+```
+
+#### From Source (Rust)
+
+If you have Rust installed, you can build from source:
+
+```bash
+git clone https://github.com/mcman2017/qt-vault-public.git
+cd qt-vault-public
+# Note: Source code is in the private qt-vault repository
+# Binary releases are available for download above
+```
+
 ## Usage
 
 ### 1. Get the Public Key
