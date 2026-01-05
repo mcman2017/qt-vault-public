@@ -12,13 +12,13 @@ keywords:
   - ml-kem
   - kubernetes-operator
   - pqc
-home: https://github.com/mcman2017/qt-vault
+home: https://github.com/mcman2017/qt-vault-public
 sources:
-  - https://github.com/mcman2017/qt-vault
+  - https://github.com/mcman2017/qt-vault-public
 maintainers:
   - name: mcman2017
     url: https://github.com/mcman2017
-icon: https://raw.githubusercontent.com/mcman2017/qt-vault/main/docs/images/qt-vault-icon.png
+icon: https://raw.githubusercontent.com/mcman2017/qt-vault-public/main/docs/images/qt-vault-logo.svg
 kubeVersion: ">=1.19.0-0"
 annotations:
   category: Security

@@ -14,12 +14,12 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-04T17:14:35.376152-05:00"
+    created: "2026-01-04T19:10:56.513712-05:00"
     description: Quantum-safe Kubernetes operator for managing encrypted secrets using
       post-quantum cryptography (ML-KEM + X25519 hybrid encryption)
-    digest: bb66daf68e8d20988091d6e53594bddbaf12f52c5528ec1fef78c98e00dd11b5
-    home: https://github.com/mcman2017/qt-vault
-    icon: https://raw.githubusercontent.com/mcman2017/qt-vault/main/docs/images/qt-vault-icon.png
+    digest: 1d5a43936b5f7d5badd2acccd9cdb7c3f70d19360eeb681fca5d7d139df26893
+    home: https://github.com/mcman2017/qt-vault-public
+    icon: https://raw.githubusercontent.com/mcman2017/qt-vault-public/main/docs/images/qt-vault-logo.svg
     keywords:
     - secrets
     - quantum-safe
@@ -34,9 +34,9 @@ entries:
       url: https://github.com/mcman2017
     name: qt-vault
     sources:
-    - https://github.com/mcman2017/qt-vault
+    - https://github.com/mcman2017/qt-vault-public
     type: application
     urls:
     - https://mcman2017.github.io/qt-vault-public/qt-vault-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-04T17:14:35.375022-05:00"
+generated: "2026-01-04T19:10:56.512843-05:00"
