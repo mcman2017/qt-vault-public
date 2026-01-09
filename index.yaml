@@ -4,6 +4,44 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: security
+          description: Zero vulnerabilities - distroless base image, Go 1.24, updated dependencies
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "true"
+      artifacthub.io/operatorCapabilities: Seamless Upgrades
+      artifacthub.io/prerelease: "true"
+      category: Security
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 0.1.2
+    created: "2026-01-09T12:43:31.301572-05:00"
+    description: Quantum-safe Kubernetes operator for managing encrypted secrets using
+      post-quantum cryptography (ML-KEM + X25519 hybrid encryption)
+    digest: 82335f973a4a8a7195ef16fd9b9acbba2292df12d9b05ae9297d15f029b5adbd
+    home: https://github.com/mcman2017/qt-vault
+    icon: https://raw.githubusercontent.com/mcman2017/qt-vault-public/main/docs/images/qt-vault-logo.svg
+    keywords:
+    - secrets
+    - quantum-safe
+    - post-quantum
+    - encryption
+    - ml-kem
+    - kubernetes-operator
+    - pqc
+    kubeVersion: '>=1.19.0-0'
+    maintainers:
+    - name: mcman2017
+      url: https://github.com/mcman2017
+    name: qt-vault
+    sources:
+    - https://github.com/mcman2017/qt-vault
+    type: application
+    urls:
+    - https://mcman2017.github.io/qt-vault-public/qt-vault-0.1.2.tgz
+    version: 0.1.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: security
           description: Applied security updates to base image (CVE-2023-45853 mitigation)
       artifacthub.io/containsSecurityUpdates: "true"
       artifacthub.io/license: Apache-2.0
@@ -14,7 +52,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 0.1.1
-    created: "2026-01-08T18:10:36.084229-05:00"
+    created: "2026-01-09T12:43:31.300287-05:00"
     description: Quantum-safe Kubernetes operator for managing encrypted secrets using
       post-quantum cryptography (ML-KEM + X25519 hybrid encryption)
     digest: 62a775de534de62652d2271bedc831257c87864d47c5b5bc7c6526cdc6dd4416
@@ -52,7 +90,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-01-08T18:10:36.081789-05:00"
+    created: "2026-01-09T12:43:31.299492-05:00"
     description: Quantum-safe Kubernetes operator for managing encrypted secrets using
       post-quantum cryptography (ML-KEM + X25519 hybrid encryption)
     digest: 7676c50d6a9d68e5323466ec101ed024821f475a691510db67b3c66abd204f49
@@ -77,4 +115,4 @@ entries:
     urls:
     - https://mcman2017.github.io/qt-vault-public/qt-vault-0.1.0.tgz
     version: 0.1.0
-generated: "2026-01-08T18:10:36.079734-05:00"
+generated: "2026-01-09T12:43:31.297796-05:00"
